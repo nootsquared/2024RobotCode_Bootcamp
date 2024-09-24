@@ -41,6 +41,7 @@ import frc.robot.commands.AimbotTele;
 import frc.robot.commands.AlignToNoteAuto;
 import frc.robot.commands.AngleShooter;
 import frc.robot.commands.AngleShooterShoot;
+import frc.robot.commands.BigCommand;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.PivotIntakeAuto;
 import frc.robot.commands.PivotIntakeTele;
@@ -63,19 +64,14 @@ import frc.robot.statemachines.TrapStateMachine;
 import frc.robot.statemachines.TrapStateMachine.TRAP_STATES;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
-import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
-import frc.robot.subsystems.drive.ModuleIOTalonFX;
 import frc.robot.subsystems.drive.VisionIO;
-import frc.robot.subsystems.drive.VisionIOLimelight;
 import frc.robot.subsystems.elevator.AmpBarIO;
 import frc.robot.subsystems.elevator.AmpBarIOSIm;
-import frc.robot.subsystems.elevator.AmpBarIOSparkMAX;
 import frc.robot.subsystems.elevator.Elevator;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOSim;
-import frc.robot.subsystems.elevator.ElevatorIOTalonFX;
 import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeRollerIOSim;
 import frc.robot.subsystems.intake.IntakeRollerIOSparkFlex;
@@ -94,7 +90,6 @@ import frc.robot.subsystems.shooter.FeederIOTalonFX;
 import frc.robot.subsystems.shooter.FlywheelIOSim;
 import frc.robot.subsystems.shooter.FlywheelIOTalonFX;
 import frc.robot.subsystems.shooter.LeafBlowerIO;
-import frc.robot.subsystems.shooter.LeafBlowerIOTalonSRX;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.util.FieldConstants;
 import java.util.Map;
@@ -174,7 +169,7 @@ public class RobotContainer {
                 new ModuleIOSim(),
                 new ModuleIOSim(),
                 new ModuleIOSim());
-                new Intake(new IntakeRollerIOSparkFlex(RobotMap.IntakeIDs.ROLLERS));
+        intake = new Intake(new IntakeRollerIOSparkFlex(RobotMap.IntakeIDs.ROLLERS));
         shooter =
             new Shooter(
                 new FlywheelIOTalonFX(
@@ -184,9 +179,9 @@ public class RobotContainer {
                 new LeafBlowerIO() {});
         elevator = new Elevator(new ElevatorIOSim(), new AmpBarIOSIm());
         pivot =
-        new Pivot(
-            new PivotIOTalonFX(
-                RobotMap.PivotIDs.LEFT, RobotMap.PivotIDs.RIGHT, RobotMap.PivotIDs.GYRO));
+            new Pivot(
+                new PivotIOTalonFX(
+                    RobotMap.PivotIDs.LEFT, RobotMap.PivotIDs.RIGHT, RobotMap.PivotIDs.GYRO));
         led = new LED(new LED_IOCANdle(20, Constants.CANBUS));
         break;
       case REPLAY:
@@ -205,7 +200,7 @@ public class RobotContainer {
                 new FeederIOSim(),
                 new DistanceSensorIO() {},
                 new LeafBlowerIO() {});
-        elevator = new Elevator(new ElevatorIOSim(), null);
+        elevator = new Elevator(new ElevatorIOSim(), new AmpBarIOSIm());
         pivot = new Pivot(new PivotIOSim());
         led = new LED(new LED_IOSim());
         break;
@@ -557,29 +552,35 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-  //  driverControls();
-    //manipControls();
-   
+    //  driverControls();
+    // manipControls();
+
     demoControls();
     // testControls();
   }
-  
-  private void demoControls(){
-    //day 3 code goes here 
-    
-    //bind changing the leds to blue, red, and green, to x, a, and y respectively 
-    driveController.x().onTrue([InstantCommand(method to run, subsystem)]);
-    driveController.a().onTrue([InstantCommand(method to run, subsystem)]);
-    driveController.y().onTrue([InstantCommand(method to run, subsystem)]);
 
-    driveController.rightBumper([command(subsystems and other parameters)]);
+  private void demoControls() {
+    // day 3 code goes here
 
-    
+    // bind changing the leds to blue, red, and green, to x, a, and y respectively
+    driveController
+        .x()
+        .onTrue(new InstantCommand(() -> led.setState(Constants.LED_STATE.FIRE), led));
+    driveController
+        .a()
+        .onTrue(new InstantCommand(() -> led.setState(Constants.LED_STATE.PAPAYA_ORANGE), led));
+    driveController
+        .y()
+        .onTrue(new InstantCommand(() -> led.setState(Constants.LED_STATE.YELLOW), led));
 
+    driveController.rightBumper().onTrue(new BigCommand(intake, shooter, led));
+    //  driveController
+    //       .rightBumper()
+    //      .onFalse(
+    //         new ParallelCommandGroup(
+    //             new InstantCommand(() -> shooter.stopFeeders(), shooter),
+    //             new InstantCommand(() -> shooter.stopFlywheels())));
   }
-
-
-
 
   private void testControls() {
     drive.setDefaultCommand(

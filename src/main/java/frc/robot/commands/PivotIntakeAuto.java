@@ -34,7 +34,7 @@ public class PivotIntakeAuto extends SequentialCommandGroup {
           new WaitCommand(1),
           new InstantCommand(shooter::stopFeeders));
       // new InstantCommand(shooter::stopFeedWhenSeen, shooter));
-      ;
+
     } else {
       addCommands(
           new SetPivotTarget(setpoint, pivot),

@@ -18,10 +18,10 @@ public class SampleCommand extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     addCommands(
-      new IntakeNote(intake, shooter, led, false),
-      new InstantCommand(()-> [subsystem].[subsystem method], [subsystem]),
-      new WaitCommand([seconds]),
-      new InstantCommand(()-> [subsystem].[subsystem method], [subsystem])
-    );
+        new IntakeNote(intake, shooter, led, false)
+        //  new InstantCommand(()-> [subsystem].[subsystem method], [subsystem]),
+        //  new WaitCommand([seconds]),
+        // new InstantCommand(()-> [subsystem].[subsystem method], [subsystem])
+        );
   }
 }
