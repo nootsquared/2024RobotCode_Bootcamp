@@ -168,28 +168,25 @@ public class RobotContainer {
       case REAL:
         drive =
             new Drive(
-                new GyroIOPigeon2(),
-                new VisionIOLimelight(),
-                new ModuleIOTalonFX(0),
-                new ModuleIOTalonFX(1),
-                new ModuleIOTalonFX(2),
-                new ModuleIOTalonFX(3));
-        intake = new Intake(new IntakeRollerIOSparkFlex(RobotMap.IntakeIDs.ROLLERS));
+                new GyroIO() {},
+                new VisionIO() {},
+                new ModuleIOSim(),
+                new ModuleIOSim(),
+                new ModuleIOSim(),
+                new ModuleIOSim());
+                new Intake(new IntakeRollerIOSparkFlex(RobotMap.IntakeIDs.ROLLERS));
         shooter =
             new Shooter(
                 new FlywheelIOTalonFX(
                     RobotMap.ShooterIDs.FLYWHEEL_LEFT, RobotMap.ShooterIDs.FLYWHEEL_RIGHT),
                 new FeederIOTalonFX(RobotMap.ShooterIDs.FEEDER),
                 new DistanceSensorIOAnalog(),
-                new LeafBlowerIOTalonSRX(18));
-        elevator =
-            new Elevator(
-                new ElevatorIOTalonFX(RobotMap.ElevatorIDs.LEFT, RobotMap.ElevatorIDs.RIGHT),
-                new AmpBarIOSparkMAX(RobotMap.ElevatorIDs.BAR));
+                new LeafBlowerIO() {});
+        elevator = new Elevator(new ElevatorIOSim(), new AmpBarIOSIm());
         pivot =
-            new Pivot(
-                new PivotIOTalonFX(
-                    RobotMap.PivotIDs.LEFT, RobotMap.PivotIDs.RIGHT, RobotMap.PivotIDs.GYRO));
+        new Pivot(
+            new PivotIOTalonFX(
+                RobotMap.PivotIDs.LEFT, RobotMap.PivotIDs.RIGHT, RobotMap.PivotIDs.GYRO));
         led = new LED(new LED_IOCANdle(20, Constants.CANBUS));
         break;
       case REPLAY:
@@ -560,11 +557,29 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driverControls();
-    manipControls();
-
+  //  driverControls();
+    //manipControls();
+   
+    demoControls();
     // testControls();
   }
+  
+  private void demoControls(){
+    //day 3 code goes here 
+    
+    //bind changing the leds to blue, red, and green, to x, a, and y respectively 
+    driveController.x().onTrue([InstantCommand(method to run, subsystem)]);
+    driveController.a().onTrue([InstantCommand(method to run, subsystem)]);
+    driveController.y().onTrue([InstantCommand(method to run, subsystem)]);
+
+    driveController.rightBumper([command(subsystems and other parameters)]);
+
+    
+
+  }
+
+
+
 
   private void testControls() {
     drive.setDefaultCommand(
