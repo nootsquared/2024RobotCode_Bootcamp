@@ -14,57 +14,41 @@ import frc.robot.subsystems.shooter.Shooter;
 public class IntakeNote extends Command {
   /** Creates a new IntakeNote. */
   private final Intake intake;
-
   private final LED led;
   private final Shooter shooter;
-  private boolean isAutoAlign;
 
-  public IntakeNote(Intake intake, Shooter shooter, LED led, boolean isAutoAlign) {
+  public IntakeNote(Intake intake, Shooter shooter, LED led) {
     this.intake = intake;
     this.shooter = shooter;
     this.led = led;
-
-    this.isAutoAlign = isAutoAlign;
-
     addRequirements(intake, shooter, led);
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    intake.runRollers(12);
-    shooter.setFeedersRPM(500);
+    // set the intake rollers to 12 volts and the shooter feeders to 500 RPM
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if (intake.getVolts() < 1 && intake.getAmps() > 38 && intake.getRPM() < 44.14) {
-      led.setState(LED_STATE.PURPLE);
-    } else {
-      if (isAutoAlign) {
-        led.setState(LED_STATE.FLASHING_RED);
-      } else {
-        led.setState(LED_STATE.RED);
-      }
-    }
-    if (shooter.seesNote() == NoteState.CURRENT || shooter.seesNote() == NoteState.SENSOR)
-      end(true);
+    // fill in the blank to log the intake RPM
+    Logger.recordOutput("intake rpm", ______);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.changeLEDBoolTrue();
-    shooter.setFeedersRPM(0);
-    intake.stopRollers();
-    // if (shooter.seesNote()) ;
+    // when the command ends, stop the shooter feeder and stop the intake rollers
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return shooter.seesNote() == NoteState.SENSOR || shooter.seesNote() == NoteState.CURRENT;
+    // fill in the blanks to tell the command its finished when the shooter sees a note (hint: look at shooter.java)
+    boolean weSawANote = ____;
+    
+    return weSawANote;
   }
 }
