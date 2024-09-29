@@ -562,6 +562,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     driverControls();
     manipControls();
+    demoControls();
 
     // testControls();
   }
@@ -894,6 +895,13 @@ public class RobotContainer {
     //                         new SetPivotTarget(Constants.PivotConstants.STOW_SETPOINT_DEG,
     // pivot))
     //                     .andThen(new PositionNoteInFeeder(shooter, intake))));
+
+  }
+
+  private void demoControls() {
+    // bind driver controller x button -> intake.runRollersAtSpeed(Constants.INTAKE_STATE.INTAKE)
+    // bind driver controller b button -> intake.runRollersAtSpeed(Constants.INTAKE_STATE.OUTTAKE)
+    // bind driver controller a button -> intake.runRollersAtSpeed(Constants.INTAKE_STATE.NONE)
   }
 
   private void manipControls() {

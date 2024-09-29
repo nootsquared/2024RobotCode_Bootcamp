@@ -24,6 +24,12 @@ public class Intake extends SubsystemBase {
     roller.setVoltage(volts);
   }
 
+  // make a new method called setRollerState with the input type being the enum you created in Constants.java
+  // depending on the enum passed in, set the roller voltage to different values
+  // intake -> 12 volts
+  // outtake -> -12 volts
+  // none -> 0 volts
+
   public void stopRollers() {
     roller.stop();
   }

@@ -188,4 +188,6 @@ public final class Constants {
     AMP,
     TRAP
   }
+
+  // create INTAKE_STATE here
 }
