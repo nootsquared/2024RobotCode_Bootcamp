@@ -901,7 +901,7 @@ public class RobotContainer {
   private void demoControls() {
     // bind driver controller x button -> intake.runRollersAtSpeed(Constants.INTAKE_STATE.INTAKE)
     // bind driver controller b button -> intake.runRollersAtSpeed(Constants.INTAKE_STATE.OUTTAKE)
-    // bind driver controller a button -> intake.runRollersAtSpeed(Constants.INTAKE_STATE.NONE)
+    // bind release of either button -> intake.runRollersAtSpeed(Constants.INTAKE_STATE.NONE)
   }
 
   private void manipControls() {
