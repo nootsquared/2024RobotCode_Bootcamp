@@ -206,9 +206,9 @@ public class Elevator extends SubsystemBase {
   }
 
   public int getExtenderPosition(Constants.ELEVATOR_POSITIONS position) {
-    if (position == ELEVATOR_POSITIONS.POS1) {
+    if (position == ELEVATOR_POSITIONS.POSITION_1) {
       return 1;
-    } else if (position == ELEVATOR_POSITIONS.POS2) {
+    } else if (position == ELEVATOR_POSITIONS.POSITION_2) {
       return 2;
     } else {
       return 3;

@@ -125,6 +125,8 @@ public class Pivot extends SubsystemBase {
   // Create setPivotPosition here
 
   // Create getPivotPosition here
+  // Intake -> 59.0
+  // Stow -> 50.7
 
   public void setPivotCurrent(double current) {
     pivotCurrent = new TrapezoidProfile.State(current, 0);

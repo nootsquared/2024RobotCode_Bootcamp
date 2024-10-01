@@ -190,4 +190,9 @@ public final class Constants {
   }
 
   // CREATE PIVOT_POSITIONS HERE
+  public static enum ELEVATOR_POSITIONS {
+    POSITION_1,
+    POSITION_2, 
+    POSITION_3
+  }
 }

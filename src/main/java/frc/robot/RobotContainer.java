@@ -31,6 +31,7 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.WaitUntilCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.ELEVATOR_POSITIONS;
 import frc.robot.Constants.LED_STATE;
 import frc.robot.Constants.NOTE_POSITIONS;
 import frc.robot.Constants.NoteState;
@@ -900,7 +901,9 @@ public class RobotContainer {
 
   // PUT YOUR BINDINGS HERE
   private void demoControls() {
-    
+    driveController.a().onTrue(new RecapCommand(elevator, ELEVATOR_POSITIONS.POSITION_1));
+    driveController.b().onTrue(new RecapCommand(elevator, ELEVATOR_POSITIONS.POSITION_2));
+    driveController.x().onTrue(new RecapCommand(elevator, ELEVATOR_POSITIONS.POSITION_3));
   }
 
   private void manipControls() {
