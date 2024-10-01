@@ -45,6 +45,7 @@ import frc.robot.commands.DriveCommands;
 import frc.robot.commands.PivotIntakeAuto;
 import frc.robot.commands.PivotIntakeTele;
 import frc.robot.commands.PositionNoteInFeeder;
+import frc.robot.commands.RecapCommand;
 import frc.robot.commands.ScoreAmp;
 import frc.robot.commands.ScoreTrap;
 import frc.robot.commands.SetAmpBarTarget;
@@ -562,6 +563,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     driverControls();
     manipControls();
+    demoControls();
 
     // testControls();
   }
@@ -894,6 +896,11 @@ public class RobotContainer {
     //                         new SetPivotTarget(Constants.PivotConstants.STOW_SETPOINT_DEG,
     // pivot))
     //                     .andThen(new PositionNoteInFeeder(shooter, intake))));
+  }
+
+  // PUT YOUR BINDINGS HERE
+  private void demoControls() {
+    
   }
 
   private void manipControls() {

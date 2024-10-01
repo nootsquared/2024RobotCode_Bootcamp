@@ -6,6 +6,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Constants.ELEVATOR_POSITIONS;
 import frc.robot.util.LoggedTunableNumber;
 import org.littletonrobotics.junction.Logger;
 
@@ -198,6 +199,20 @@ public class Elevator extends SubsystemBase {
   public void setExtenderGoal(double setpoint) {
     goal = setpoint;
     extenderGoal = new TrapezoidProfile.State(setpoint, 0);
+  }
+
+  public void setExtenderPosition(Constants.ELEVATOR_POSITIONS position) {
+    setExtenderGoal(getExtenderPosition(position));
+  }
+
+  public int getExtenderPosition(Constants.ELEVATOR_POSITIONS position) {
+    if (position == ELEVATOR_POSITIONS.POS1) {
+      return 1;
+    } else if (position == ELEVATOR_POSITIONS.POS2) {
+      return 2;
+    } else {
+      return 3;
+    }
   }
 
   public void setPositionExtend(double position, double velocity) {

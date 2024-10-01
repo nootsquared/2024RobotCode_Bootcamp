@@ -188,4 +188,6 @@ public final class Constants {
     AMP,
     TRAP
   }
+
+  // CREATE PIVOT_POSITIONS HERE
 }
