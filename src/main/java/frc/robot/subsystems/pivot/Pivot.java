@@ -128,6 +128,18 @@ public class Pivot extends SubsystemBase {
   // Intake -> 59.0
   // Stow -> 50.7
 
+  public void setPivotPosition(Constants.PIVOT_POSITIONS position) {
+    setPivotGoal(getPivotPosition(position));
+  }
+
+  public double getPivotPosition(Constants.PIVOT_POSITIONS position) {
+    if (position == Constants.PIVOT_POSITIONS.INTAKE) {
+      return 59.0;
+    } else {
+      return 50.7;
+    }
+  } 
+
   public void setPivotCurrent(double current) {
     pivotCurrent = new TrapezoidProfile.State(current, 0);
   }

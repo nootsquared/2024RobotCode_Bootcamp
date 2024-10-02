@@ -47,6 +47,7 @@ import frc.robot.commands.PivotIntakeAuto;
 import frc.robot.commands.PivotIntakeTele;
 import frc.robot.commands.PositionNoteInFeeder;
 import frc.robot.commands.RecapCommand;
+import frc.robot.commands.RecapCommand2;
 import frc.robot.commands.ScoreAmp;
 import frc.robot.commands.ScoreTrap;
 import frc.robot.commands.SetAmpBarTarget;
@@ -901,9 +902,8 @@ public class RobotContainer {
 
   // PUT YOUR BINDINGS HERE
   private void demoControls() {
-    driveController.a().onTrue(new RecapCommand(elevator, ELEVATOR_POSITIONS.POSITION_1));
-    driveController.b().onTrue(new RecapCommand(elevator, ELEVATOR_POSITIONS.POSITION_2));
-    driveController.x().onTrue(new RecapCommand(elevator, ELEVATOR_POSITIONS.POSITION_3));
+    driveController.a().onTrue(new RecapCommand2(Constants.PIVOT_POSITIONS.INTAKE, pivot));
+    driveController.b().onTrue(new RecapCommand2(Constants.PIVOT_POSITIONS.STOW, pivot));
   }
 
   private void manipControls() {
