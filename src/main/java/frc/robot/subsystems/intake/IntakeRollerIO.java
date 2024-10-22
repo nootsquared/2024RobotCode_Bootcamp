@@ -10,15 +10,15 @@ import org.littletonrobotics.junction.AutoLog;
 public interface IntakeRollerIO {
   @AutoLog
   public static class IntakeRollerIOInputs {
-    public double rollerVelocityRPM = 0.0;
-    public double rollerRotations = 0.0;
-    public double appliedVolts = 0.0;
-    public double currentAmps = 0.0;
+    // Initialize necessary inputs here
+
   }
 
-  public default void updateInputs(IntakeRollerIOInputs inputs) {}
+  // DONT DEFINE BODY !!1
+  // add a updateInputs method with a parameter of a IntakeRollerIOInputs object
 
-  public default void setVoltage(double volts) {}
+  // add a setVoltage function that takes in a double volts
 
-  public default void stop() {}
+  // add a void method called stop
+
 }

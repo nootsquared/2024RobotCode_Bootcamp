@@ -35,21 +35,17 @@ public class IntakeRollerIOTalonFX implements IntakeRollerIO {
 
   @Override
   public void updateInputs(IntakeRollerIOInputs inputs) {
-    BaseStatusSignal.refreshAll(rollerRotations, rollerVelocityRPS, appliedVolts, currentAmps);
 
-    inputs.rollerRotations = rollerRotations.getValueAsDouble();
-    inputs.rollerVelocityRPM = rollerVelocityRPS.getValueAsDouble() * 60.;
-    inputs.appliedVolts = appliedVolts.getValue();
-    inputs.currentAmps = currentAmps.getValue();
+    // refresh the signal and get all the inputs as a double value
   }
 
   @Override
   public void setVoltage(double volts) {
-    falcon.setVoltage(volts);
+    // set the motors voltage to volts
   }
 
   @Override
   public void stop() {
-    falcon.stopMotor();
+    // stop the motor
   }
 }
