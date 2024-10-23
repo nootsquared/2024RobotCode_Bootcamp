@@ -118,6 +118,8 @@ public class RobotContainer {
 
   private final CommandXboxController driveController = new CommandXboxController(0);
   private final CommandXboxController manipController = new CommandXboxController(1);
+  private final CommandXboxController demoController = new CommandXboxController(2);
+  
   private final LoggedDashboardChooser<Command> autoChooser;
   private final SendableChooser<Command> autos;
 
@@ -562,6 +564,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     driverControls();
     manipControls();
+    demoControls();
 
     // testControls();
   }
@@ -571,9 +574,32 @@ public class RobotContainer {
 
   // TODO:: change drive controls to match changed test controls
   private void driverControls() {
+    
   }
 
   private void manipControls() {
+  }
+
+  private void demoControls() {
+    demoController.a().onTrue(new SetPivotTarget(45, pivot));
+
+    demoController.b().onTrue(new ScoreTrap(shooter, pivot));
+    demoController.b().onFalse(new InstantCommand(shooter::turnOffFan)
+    .andThen(new InstantCommand(shooter::stopFeeders))
+    .andThen(new InstantCommand(shooter::stopFlywheels)));
+
+    demoController.rightTrigger().whileTrue(new PivotIntakeAuto().withTimeout(5));
+    demoController.rightTrigger().onFalse(new InstantCommand(shooter::stopFeeders)
+    .andThen(new InstantCommand(intake::stopRollers)));
+
+    demoController.leftTrigger().onTrue(new ParallelCommandGroup(
+        new InstantCommand(() -> climbStateMachine.setClimbState(CLIMB_STATES.NONE)), 
+        new InstantCommand(() -> trapStateMachine.setTargetState(TRAP_STATES.PIVOT)), 
+        new SetElevatorTarget(0, 1.5, elevator)
+    ));
+    demoController.leftTrigger().onFalse(new InstantCommand(() -> led.setState(LED_STATE.BLUE))
+    .andThen(new InstantCommand(() -> intake.changeLEDBoolFalse()))
+    .andThen(new InstantCommand(() -> shooter.setFeedersRPM(500)).withTimeout(3)));
   }
 
   /**
