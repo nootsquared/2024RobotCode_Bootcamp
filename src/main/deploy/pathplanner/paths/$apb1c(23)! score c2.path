@@ -1,5 +1,5 @@
 {
-  "version": 1.0,
+  "version": "2025.0",
   "waypoints": [
     {
       "anchor": {
@@ -31,15 +31,16 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.8,
-      "rotationDegrees": 24.271006418809336,
-      "rotateFast": false
+      "rotationDegrees": 24.271006418809336
     }
   ],
   "constraintZones": [],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "pivot39",
       "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
         "data": {
@@ -57,6 +58,7 @@
     {
       "name": "aimbot",
       "waypointRelativePos": 0.9,
+      "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
         "data": {
@@ -76,18 +78,19 @@
     "maxVelocity": 4.0,
     "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 23.198590513648075,
-    "rotateFast": false
+    "rotation": 23.198590513648075
   },
   "reversed": false,
   "folder": "$a!p-b1-c2-c3",
-  "previewStartingState": {
-    "rotation": 0,
-    "velocity": 0
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }

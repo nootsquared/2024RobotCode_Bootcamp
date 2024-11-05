@@ -1,5 +1,5 @@
 {
-  "version": 1.0,
+  "version": "2025.0",
   "waypoints": [
     {
       "anchor": {
@@ -36,12 +36,12 @@
         "y": 4.113976955226638
       },
       "prevControl": {
-        "x": 5.636637899402766,
-        "y": 4.125907513920935
+        "x": 5.61305417502193,
+        "y": 4.127152121438764
       },
       "nextControl": {
-        "x": 6.038560259428534,
-        "y": 4.104696462485903
+        "x": 6.112359352224341,
+        "y": 4.100801789014513
       },
       "isLocked": false,
       "linkedName": null
@@ -62,10 +62,12 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "pivot 39",
       "waypointRelativePos": 0.85,
+      "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
         "data": {
@@ -85,18 +87,19 @@
     "maxVelocity": 4.0,
     "maxAcceleration": 3.5,
     "maxAngularVelocity": 540.0,
-    "maxAngularAcceleration": 720.0
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
   },
   "goalEndState": {
     "velocity": 2.0,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": "$a!p-b1-c2-c3",
-  "previewStartingState": {
-    "rotation": 0,
-    "velocity": 0
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }

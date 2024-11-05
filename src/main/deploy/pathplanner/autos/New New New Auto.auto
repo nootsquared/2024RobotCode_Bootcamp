@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "test path"
+            "pathName": "New New New Path"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": null
           }
         }
       ]

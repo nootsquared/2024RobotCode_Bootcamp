@@ -45,6 +45,7 @@ import frc.robot.commands.DriveCommands;
 import frc.robot.commands.PivotIntakeAuto;
 import frc.robot.commands.PivotIntakeTele;
 import frc.robot.commands.PositionNoteInFeeder;
+import frc.robot.commands.PracticeCommand;
 import frc.robot.commands.ScoreAmp;
 import frc.robot.commands.ScoreTrap;
 import frc.robot.commands.SetAmpBarTarget;
@@ -519,6 +520,8 @@ public class RobotContainer {
                 .followPathCommand("c5 check", false)
                 .andThen(new AlignToNoteAuto(led, drive, shooter, intake, pivot)),
             () -> drive.isNoteAt(FieldConstants.StagingLocations.centerlineTranslations[4])));
+    
+    NamedCommands.registerCommand("TestCommand", new PracticeCommand(led, intake, LED_STATE.BLUE, 999999));
 
     // Set up auto routines
     autos = new SendableChooser<>();

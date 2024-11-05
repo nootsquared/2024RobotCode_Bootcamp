@@ -1,5 +1,5 @@
 {
-  "version": 1.0,
+  "version": "2025.0",
   "waypoints": [
     {
       "anchor": {
@@ -21,7 +21,7 @@
       },
       "prevControl": {
         "x": 2.495675462752389,
-        "y": 1.05224173872912
+        "y": 1.0522417387291203
       },
       "nextControl": {
         "x": 6.151600085607578,
@@ -37,7 +37,7 @@
       },
       "prevControl": {
         "x": 6.1804779084088155,
-        "y": 0.7270813067826992
+        "y": 0.7270813067826994
       },
       "nextControl": null,
       "isLocked": false,
@@ -47,13 +47,11 @@
   "rotationTargets": [
     {
       "waypointRelativePos": 0.5,
-      "rotationDegrees": -50.0,
-      "rotateFast": false
+      "rotationDegrees": -50.0
     },
     {
       "waypointRelativePos": 1.05,
-      "rotationDegrees": 0,
-      "rotateFast": false
+      "rotationDegrees": 0.0
     }
   ],
   "constraintZones": [
@@ -65,7 +63,9 @@
         "maxVelocity": 1.5,
         "maxAcceleration": 1.5,
         "maxAngularVelocity": 540.0,
-        "maxAngularAcceleration": 720.0
+        "maxAngularAcceleration": 720.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
       }
     },
     {
@@ -76,14 +76,18 @@
         "maxVelocity": 1.5,
         "maxAcceleration": 2.0,
         "maxAngularVelocity": 360.0,
-        "maxAngularAcceleration": 540.0
+        "maxAngularAcceleration": 540.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
       }
     }
   ],
+  "pointTowardsZones": [],
   "eventMarkers": [
     {
       "name": "New Event Marker",
       "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
       "command": {
         "type": "sequential",
         "data": {
@@ -103,15 +107,19 @@
     "maxVelocity": 3.0,
     "maxAcceleration": 3.5,
     "maxAngularVelocity": 360.0,
-    "maxAngularAcceleration": 540.0
+    "maxAngularAcceleration": 540.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
   },
   "goalEndState": {
     "velocity": 0.5,
-    "rotation": 0,
-    "rotateFast": false
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": "$s!p-b3-c5-c4",
-  "previewStartingState": null,
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 0.0
+  },
   "useDefaultConstraints": false
 }

@@ -1,12 +1,5 @@
 {
-  "version": 1.0,
-  "startingPose": {
-    "position": {
-      "x": 1.5365255266887123,
-      "y": 5.539225686154654
-    },
-    "rotation": 0
-  },
+  "version": "2025.0",
   "command": {
     "type": "sequential",
     "data": {
@@ -117,6 +110,7 @@
       ]
     }
   },
+  "resetOdom": true,
   "folder": "limelight autos",
   "choreoAuto": false
 }
