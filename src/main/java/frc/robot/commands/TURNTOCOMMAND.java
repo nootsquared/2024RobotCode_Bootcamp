@@ -155,6 +155,7 @@ public class TURNTOCOMMAND extends Command {
     if (DriverStation.getAlliance().isPresent()) this.alliance = DriverStation.getAlliance().get();
 
     //ADD YOUR RED AND BLUE ALLIANCE TARGET ANGLE AND PIDSETPOINT HERE (HINT: 2 CONDITIONALS)
+    //Set the PID target to turn to the SPEAKER individually for the blue and red alliance (they are different setpoints)
 
     Logger.recordOutput("Rotation error", pid.getPositionError());
 
