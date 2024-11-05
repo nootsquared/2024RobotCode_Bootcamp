@@ -26,7 +26,7 @@ import frc.robot.subsystems.pivot.Pivot;
 import frc.robot.subsystems.shooter.Shooter;
 import frc.robot.util.FieldConstants;
 
-public class AimbotTele extends Command {
+public class TURNTOCOMMAND extends Command {
 
   private final Drive drive;
   private final Shooter shooter;
@@ -44,7 +44,7 @@ public class AimbotTele extends Command {
   private double pivotSetpointDeg = 0;
 
   
-  public AimbotTele(
+  public TURNTOCOMMAND(
       Drive drive, CommandXboxController controller, Shooter shooter, Pivot pivot, LED led) {
     // Use addRequirements() here to declare subsystem dependencies.
     this.drive = drive;
@@ -154,28 +154,7 @@ public class AimbotTele extends Command {
     double targetAngle;
     if (DriverStation.getAlliance().isPresent()) this.alliance = DriverStation.getAlliance().get();
 
-    if (alliance == DriverStation.Alliance.Red) {
-
-      targetAngle =
-          new Rotation2d(
-                      (FieldConstants.fieldLength) - drive.getPose().getX(),
-                      FieldConstants.Speaker.speakerCenterY - drive.getPose().getY())
-                  .getDegrees()
-              + 180;
-      pid.setSetpoint(targetAngle);
-
-    } 
-    
-    else {
-      targetAngle =
-          new Rotation2d(
-                      -drive.getPose().getX(),
-                      FieldConstants.Speaker.speakerCenterY - drive.getPose().getY())
-                  .getDegrees()
-              + 180;
-
-      pid.setSetpoint(targetAngle);
-    }
+    //ADD YOUR RED AND BLUE ALLIANCE TARGET ANGLE AND PIDSETPOINT HERE (HINT: 2 CONDITIONALS)
 
     Logger.recordOutput("Rotation error", pid.getPositionError());
 

@@ -13,8 +13,14 @@
 
 package frc.robot;
 
+import java.util.Map;
+
+import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
+import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
+
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
@@ -40,7 +46,6 @@ import frc.robot.commands.AimbotStatic;
 import frc.robot.commands.AimbotTele;
 import frc.robot.commands.AlignToNoteAuto;
 import frc.robot.commands.AngleShooter;
-// import frc.robot.commands.AngleShooterShoot;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.PivotIntakeAuto;
 import frc.robot.commands.PivotIntakeTele;
@@ -55,6 +60,7 @@ import frc.robot.commands.ShootNoteAmp;
 import frc.robot.commands.ShootNoteCenter;
 import frc.robot.commands.ShootNoteSource;
 import frc.robot.commands.StopIntakeFeed;
+import frc.robot.commands.TURNTOCOMMAND;
 import frc.robot.commands.TurnToAmpCorner;
 import frc.robot.commands.TurnToSpeaker;
 import frc.robot.statemachines.ClimbStateMachine;
@@ -96,9 +102,6 @@ import frc.robot.subsystems.shooter.FlywheelIOTalonFX;
 import frc.robot.subsystems.shooter.LeafBlowerIO;
 import frc.robot.subsystems.shooter.LeafBlowerIOTalonSRX;
 import frc.robot.subsystems.shooter.Shooter;
-import java.util.Map;
-import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
-import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -473,12 +476,28 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driverControls();
-    manipControls();
-
+    demoControls();
+    // driverControls();
+    // manipControls();
     // testControls();
   }
 
+  // -----------------------------------------------------------------------------------------------
+  private void demoControls(){
+    drive.setDefaultCommand(
+        DriveCommands.joystickDrive(
+            drive,
+            () -> -driveController.getLeftY(),
+            () -> -driveController.getLeftX(),
+            () -> -driveController.getRightX(),
+            () -> driveController.leftBumper().getAsBoolean(),
+            () -> manipController.leftBumper().getAsBoolean()));
+
+    driveRightTrigger.onTrue(new TURNTOCOMMAND(drive, driveController, shooter, pivot, led));
+  }
+  // -----------------------------------------------------------------------------------------------
+
+  
   private void testControls() {
     drive.setDefaultCommand(
         DriveCommands.joystickDrive(
