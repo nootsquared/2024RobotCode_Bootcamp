@@ -72,7 +72,7 @@ public class TURNTOAMPTEMPLATE extends Command {
 
     //turn to amp code (talk to students abt difference between amping and speaker shots)
 
-    Logger.recordOutput("target angle amp", targetAngle);
+    // Logger.recordOutput("target angle amp", targetAngle);
     double linearMagnitude =
         MathUtil.applyDeadband(Math.hypot(-controller.getLeftY(), -controller.getLeftX()), 0.1);
     Rotation2d linearDirection = new Rotation2d(-controller.getLeftY(), -controller.getLeftX());
