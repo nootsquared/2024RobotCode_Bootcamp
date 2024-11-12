@@ -35,6 +35,7 @@ import frc.robot.Constants.LED_STATE;
 import frc.robot.Constants.NOTE_POSITIONS;
 import frc.robot.Constants.NoteState;
 import frc.robot.Constants.SHOOT_STATE;
+import frc.robot.commands.ACTIVITYFILE;
 import frc.robot.commands.AimbotAuto;
 import frc.robot.commands.AimbotStatic;
 import frc.robot.commands.AimbotTele;
@@ -473,10 +474,14 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driverControls();
-    manipControls();
-
+    // driverControls();
+    // manipControls();
+    pivotActivityControls();
     // testControls();
+  }
+
+  private void pivotActivityControls(){
+    driveController.a().onTrue(new ACTIVITYFILE(drive, driveController, shooter, pivot, led));
   }
 
   private void testControls() {
