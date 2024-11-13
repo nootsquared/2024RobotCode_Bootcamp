@@ -517,6 +517,13 @@ public class RobotContainer {
     driveController
         .rightBumper()
         .onTrue(new PivotIntakeTele(pivot, intake, shooter, led, false, false));
+
+    driveController.rightBumper().onFalse(
+        new WaitCommand(3)
+        .andThen(new InstantCommand(() -> shooter.setFeedersRPM(-4000)))
+        .andThen(new InstantCommand(() -> intake.runRollers(-Constants.IntakeConstants.APPLIED_VOLTAGE), intake))
+        .andThen(new InstantCommand(() -> led.setState(LED_STATE.BLUE)))
+    );
     driveController
         .rightBumper()
         .onFalse(
