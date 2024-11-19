@@ -20,19 +20,23 @@ public class Pivot extends SubsystemBase {
   private static double kG;
   private static double kV;
 
-  private static double maxVelocityDegPerSec;
-  private static double maxAccelerationDegPerSecSquared;
+  //add two static doubles here for the max velocity and max acceleration, make sure to include units in the name
+  //dont define these yet 
+  
 
-  private TrapezoidProfile pivotProfile;
-  private TrapezoidProfile.Constraints pivotConstraints;
+  //make a TrapezoidProfile object called pivotProfile and a TrapezoidProfile.constraints object called pivotConstraints 
+  //to make a constraint object just use "TrapezoidProfile.Constraints someConstraints;""
+  //dont define these yet
+ 
 
-  private TrapezoidProfile.State pivotGoal = new TrapezoidProfile.State();
-  private TrapezoidProfile.State pivotCurrent = new TrapezoidProfile.State();
+  //make two TrapezoidProfile.state objects and give them empty objects
+  //TrapezoidProfile.State someState --syntax
+  // to make an empty object just set the object = new className(); keep the constructor empty 
+  //be carefule when declaring this 
+ 
 
-  double currTarget;
-  double lastTarget;
-
-  double goal;
+  //make one double called goalDegs or goalDegrees, this will be your "goal" position 
+  
 
   boolean isAimbot;
   SHOOT_STATE shootState;
@@ -70,17 +74,21 @@ public class Pivot extends SubsystemBase {
 
     shootState = SHOOT_STATE.AIMBOT;
 
-    maxVelocityDegPerSec = 150;
-    maxAccelerationDegPerSecSquared = 226;
-    // maxAccelerationDegPerSecSquared = 180;
+    //set your max velocity to 150 and max acceleration to 226 
 
+    
+
+    //finish the pivotConstraints object, put the max velocity and acceleration into its parameters 
     pivotConstraints =
-        new TrapezoidProfile.Constraints(maxVelocityDegPerSec, maxAccelerationDegPerSecSquared);
-    pivotProfile = new TrapezoidProfile(pivotConstraints);
+        new TrapezoidProfile.Constraints();
 
-    // setPivotGoal(90);
-    // setPivotCurrent(getPivotPositionDegs());
-    pivotCurrent = pivotProfile.calculate(0, pivotCurrent, pivotGoal);
+        //finish the pivotProfile object and pass pivotConstraints in the parameter 
+    pivotProfile = 
+
+  
+    //declare the pivots current pos state to pivotProfile.calculate(0, the current position state, the goal state)
+    //very similar to a pid controller 
+    pivotCurrentPosDegrees = 
 
     pivot.configurePID(kP, 0, 0);
     pivotFFModel = new ArmFeedforward(0, kG, kV, 0);
@@ -90,40 +98,43 @@ public class Pivot extends SubsystemBase {
     pivot.setBrakeMode(bool);
   }
 
+
   public double getPivotPositionDegs() {
     return pInputs.positionDegs;
   }
 
-  public boolean atSetpoint() {
-    return (Math.abs(getPivotError()) <= Constants.PivotConstants.THRESHOLD);
-  }
-
+ 
+  //we want to figure out if the pivot is within the range of our goal position, make a boolean atGoal method that returns whether the absolute value of
+  //the current position - the goalDegs is less than or equal to Constants.PivotConstants.THRESHOLD
   public boolean atGoal() {
-    return (Math.abs(pInputs.positionDegs - goal) <= Constants.PivotConstants.THRESHOLD);
+    return 
   }
 
-  private double getPivotError() {
-    return pInputs.positionSetpointDegs - pInputs.positionDegs;
-  }
 
+
+ 
+
+  //set the position in degrees, pass in desired pos in degs and velocity in degs per second
+  //use the MathUtil.clamp method to clamp the desired pos between 33 and 100
+  //use the setPositionSetpointDegs method here, pass in positionDegs and velocityDegs in RADIANS before using the feedforward model
   public void setPositionDegs(double positionDegs, double velocityDegsPerSec) {
-    positionDegs = MathUtil.clamp(positionDegs, 33, 120);
-    pivot.setPositionSetpointDegs(
-        positionDegs,
-        pivotFFModel.calculate(Math.toRadians(positionDegs), Math.toRadians(velocityDegsPerSec)));
+    positionDegs = MathUtil.clamp();
+    pivot.setPositionSetpointDegs();
+      
   }
 
   public void pivotStop() {
     pivot.stop();
   }
 
-  public void setPivotGoal(double setpoint) {
-    goal = setpoint;
-    pivotGoal = new TrapezoidProfile.State(setpoint, 0);
+  //make this.goalDegs = the parameter 
+  //pivotGoal should now be goalDegs , 0 Velocity 
+  //make a new object to do that 
+  public void setPivotGoalDegrees(double goalDegs) {
   }
 
-  public void setPivotCurrent(double current) {
-    pivotCurrent = new TrapezoidProfile.State(current, 0);
+  //set the current position state to currentPosDegs and 0 velocity 
+  public void setPivotCurrentDegrees(double currentPosDegs) {
   }
 
   public boolean isAimbot() {
@@ -145,15 +156,18 @@ public class Pivot extends SubsystemBase {
   @Override
   public void periodic() {
     pivot.updateInputs(pInputs);
+  
+    //set the pivotCurrentPosDegrees to the profile.calculate(CONSTANTS.LOOP_PERIOD_SECS, pivotCurrentPosDegrees, pivotGoal)
+    pivotCurrentPosDegrees = 
 
-    pivotCurrent = pivotProfile.calculate(Constants.LOOP_PERIOD_SECS, pivotCurrent, pivotGoal);
-
-    setPositionDegs(pivotCurrent.position, pivotCurrent.velocity);
+    //use the setPositionDegs method but pass in the currentPos's position and velocity 
+    setPositionDegs();
 
     Logger.processInputs("Pivot", pInputs);
     Logger.recordOutput("pivot error", getPivotError());
 
-    Logger.recordOutput("pivot goal", goal);
+    //log the goal degrees 
+    
     // This method will be called once per scheduler run
   }
 }
