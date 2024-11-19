@@ -667,6 +667,7 @@ public class Drive extends SubsystemBase {
     // }
   }
 
+
   public boolean canSeeNote() {
     return visionInputs.iTV;
   }
@@ -882,6 +883,10 @@ public class Drive extends SubsystemBase {
     }
 
     return chainCoords[closeChainIndex];
+  }
+
+  public double getNoteRotationTarget(){
+  //INSERT CODE HERE
   }
 
   public Command alignToNote(LED led) {
