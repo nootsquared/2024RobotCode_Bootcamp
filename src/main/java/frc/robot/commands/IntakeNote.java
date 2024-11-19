@@ -40,6 +40,9 @@ public class IntakeNote extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    // if note(s) stuck inside the intake, turn purple
+    // if intaking with autoalign, flash red
+    // if intaking, turn red
     if (intake.getVolts() < 1 && intake.getAmps() > 38 && intake.getRPM() < 44.14) {
       led.setState(LED_STATE.PURPLE);
     } else {
@@ -49,6 +52,7 @@ public class IntakeNote extends Command {
         led.setState(LED_STATE.RED);
       }
     }
+    // if the intake is currently intaking a note or there is a note inside the robot
     if (shooter.seesNote() == NoteState.CURRENT || shooter.seesNote() == NoteState.SENSOR)
       end(true);
   }
