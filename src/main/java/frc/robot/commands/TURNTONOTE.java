@@ -23,7 +23,7 @@ import frc.robot.subsystems.pivot.Pivot;
 import frc.robot.subsystems.shooter.Shooter;
 
 
-public class TURNTONOTE extends Command {
+public class turntonote extends Command {
   /** Creates a new AlignToNote. */
   Intake intake;
 
@@ -39,7 +39,7 @@ public class TURNTONOTE extends Command {
 
   PIDController pid;
 
-  public TURNTONOTE(Intake intake, Pivot pivot, Shooter shooter, Drive drive, LED led, CommandXboxController controller) {
+  public turntonote(Intake intake, Pivot pivot, Shooter shooter, Drive drive, LED led, CommandXboxController controller) {
     this.controller = controller;
     this.intake = intake;
     this.pivot = pivot;
@@ -85,11 +85,7 @@ public class TURNTONOTE extends Command {
             linearVelocity.getY() * drive.getMaxLinearSpeedMetersPerSec(),
             Math.toRadians(angularSpeed),
             drive.getPose().getRotation()));
-    
   }
-
-
-
   //--------------------------------
 
   @Override
