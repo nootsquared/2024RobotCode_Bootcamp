@@ -41,7 +41,6 @@ import frc.robot.commands.AimbotTele;
 import frc.robot.commands.AlignToNoteAuto;
 import frc.robot.commands.AngleShooter;
 import frc.robot.commands.AngleShooterShoot;
-import frc.robot.commands.CustomCommand;
 import frc.robot.commands.DriveCommands;
 import frc.robot.commands.PivotIntakeAuto;
 import frc.robot.commands.PivotIntakeTele;
@@ -561,21 +560,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    // driverControls();
-    // manipControls();
-    demoControls();
+    driverControls();
+    manipControls();
 
     // testControls();
-  }
-
-  private void demoControls() {
-    driveController.a().onTrue(new SequentialCommandGroup(
-        new PivotIntakeTele(pivot, intake, shooter, led, false, false), 
-        new WaitCommand(2), 
-        new CustomCommand(led, pivot, LED_STATE.GREEN, 45), 
-        new WaitCommand(2),
-        new PivotIntakeTele(pivot, intake, shooter, led, true, false)
-    ));
   }
 
   private void testControls() {
