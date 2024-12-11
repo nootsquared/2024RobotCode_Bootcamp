@@ -473,10 +473,16 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    driverControls();
-    manipControls();
+    // driverControls();
+    // manipControls();
+
+    taskControls();
 
     // testControls();
+  }
+
+  private void taskControls() {
+    driveController.a().onTrue(new TaskCommand());
   }
 
   private void testControls() {
