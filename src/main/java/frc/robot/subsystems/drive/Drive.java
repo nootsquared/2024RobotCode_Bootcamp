@@ -667,6 +667,11 @@ public class Drive extends SubsystemBase {
     // }
   }
 
+  public double gimmeTheTarget() {
+
+    return 0;
+  }
+
   public boolean canSeeNote() {
     return visionInputs.iTV;
   }
